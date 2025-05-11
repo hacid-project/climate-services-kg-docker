@@ -12,5 +12,5 @@ cd climate-services-kg-docker
 ## Run
 
 ```shell
-docker compose up
+sudo docker compose up
 ```
