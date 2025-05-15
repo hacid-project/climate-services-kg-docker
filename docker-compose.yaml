@@ -26,3 +26,50 @@ services:
     environment:
       LodViewIRInamespace: "https://w3id.org/hacid/data/cs/"
       LodViewendpoint: "http://triplestore:7200/repositories/hacid-cs"
+      LodViewpublicUrlPrefix: "https://keng.istc.cnr.it/hacid-cs-kg/id/"
+      LodViewstaticResourceURL: "https://keng.istc.cnr.it/hacid-cs-kg/id/staticResources/"
+      LodViewdefaultQueries: >
+        select distinct ?s ?p ?o { 
+          {
+            <${IRI}> ?p ?o.
+            FILTER(?p != rdf:type || ! isBLANK(?o))
+          } 
+          UNION 
+          {
+            <${IRI}> ?p1 ?s . FILTER(isBlank(?s)) . ?s ?p ?o.
+            FILTER(?p1 != rdf:type)
+          } 
+          UNION 
+          {
+            <${IRI}> ?p1 ?s1 .  FILTER(isBlank(?s1)) . ?s1 ?p2 ?s . FILTER(isBlank(?s)) . ?s ?p ?o.
+            FILTER(?p1 != rdf:type)
+          }
+          UNION 
+          {
+            <${IRI}> ?p1 ?s1 .  FILTER(isBlank(?s1)) . ?s1 ?p2 ?s2 . FILTER(isBlank(?s2)) . ?s2 ?p3 ?s . FILTER(isBlank(?s)) . ?s ?p ?o.
+            FILTER(?p1 != rdf:type)
+          }		
+        } LIMIT 10000
+      LodViewdefaultRawDataQueries: >
+        select distinct ?s ?p ?o { 
+          {
+            <${IRI}> ?p ?o.
+            FILTER(?p != rdf:type || ! isBLANK(?o))
+          } 
+          UNION 
+          {
+            <${IRI}> ?p1 ?s . FILTER(isBlank(?s)) . ?s ?p ?o.
+            FILTER(?p1 != rdf:type)
+          } 
+          UNION 
+          {
+            <${IRI}> ?p1 ?s1 .  FILTER(isBlank(?s1)) . ?s1 ?p2 ?s . FILTER(isBlank(?s)) . ?s ?p ?o.
+            FILTER(?p1 != rdf:type)
+          }
+          UNION 
+          {
+            <${IRI}> ?p1 ?s1 .  FILTER(isBlank(?s1)) . ?s1 ?p2 ?s2 . FILTER(isBlank(?s2)) . ?s2 ?p3 ?s . FILTER(isBlank(?s)) . ?s ?p ?o.
+            FILTER(?p1 != rdf:type)
+          }		
+        } LIMIT 10000
+
