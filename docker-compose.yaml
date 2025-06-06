@@ -23,3 +23,9 @@ services:
     ports:
     - '8080:8080'
     - '8009:8009'
+  yasgui:
+    image: mathiasvda/yasgui
+    environment:
+      YASGUI_DEFAULT_ENDPOINT: "https://keng.istc.cnr.it/hacid-cs-kg/sparql"
+    ports:
+    - '8088:8080'
