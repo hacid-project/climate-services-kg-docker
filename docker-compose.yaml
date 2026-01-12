@@ -22,6 +22,9 @@ services:
     container_name: graphdb-hacid-cs
     ports:
     - '7200:7200'
+    command:
+    - -Dgraphdb.workbench.cors.enable=true
+    - -Dgraphdb.workbench.cors.origin=*
   lodview:
     image: lodview
     container_name: lodview
