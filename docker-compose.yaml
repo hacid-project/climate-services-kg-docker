@@ -8,7 +8,6 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - ./data:/data
       - ./nginx/conf/:/etc/nginx/conf.d/:ro
       - ./certbot/www/:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
@@ -18,10 +17,15 @@ services:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
   triplestore:
-    image: ontotext/graphdb:11.0.1
+    image: ontotext/graphdb:11.3.0
     container_name: graphdb-hacid-cs
+    restart: unless-stopped
     ports:
     - '7200:7200'
+    volumes:
+      - ./data:/opt/graphdb/dist/data/:rw
+      # - ./graphdb.properties:/opt/graphdb/dist/conf/graphdb.properties:ro
+      - ./graphdb.license:/opt/graphdb/dist/conf/graphdb.license:ro
     command:
     - -Dgraphdb.workbench.cors.enable=true
     - -Dgraphdb.workbench.cors.origin=*
@@ -34,6 +38,7 @@ services:
     - '8009:8009'
   yasgui:
     image: mathiasvda/yasgui
+    restart: unless-stopped
     environment:
       YASGUI_DEFAULT_ENDPOINT: "https://keng.istc.cnr.it/hacid-cs-kg/sparql"
     ports:
