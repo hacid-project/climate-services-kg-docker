@@ -17,6 +17,12 @@ cd climate-services-kg-docker
 ./build-lodview-img.sh
 ```
 
+## Run
+
+```shell
+sudo docker compose up
+```
+
 ## Create Triple Store
 
 Go to http://keng.istc.cnr.it:7200/repository/create/graphdb.
@@ -28,12 +34,6 @@ Create a new repository called `hacid-cs`.
 Go to http://keng.istc.cnr.it:7200/import#user.
 
 Upload the RDF dump to the `hacid-cs` repository.
-
-## Run
-
-```shell
-sudo docker compose up
-```
 
 ## Update SSL Certificate
 
