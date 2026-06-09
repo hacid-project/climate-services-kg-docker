@@ -17,7 +17,7 @@ services:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
   triplestore:
-    image: ontotext/graphdb:11.3.0
+    image: ontotext/graphdb:11.3.3
     container_name: graphdb-hacid-cs
     restart: unless-stopped
     ports:
